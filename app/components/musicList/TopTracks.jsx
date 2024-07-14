@@ -12,7 +12,7 @@ import {
   Avatar,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import "./ForYou.css";
+import "./forYou.css";
 
 function ForYou({ songs, selected, setSelected }) {
   const [searchText, setSearchText] = useState("");
