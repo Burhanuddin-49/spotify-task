@@ -5,7 +5,12 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-import { FastForward, FastRewind, MoreHoriz } from "@mui/icons-material";
+import {
+  ArrowBack,
+  FastForward,
+  FastRewind,
+  MoreHoriz,
+} from "@mui/icons-material";
 import "./playing.css";
 
 function Playing({ songs, selected, setSelected }) {
@@ -61,7 +66,7 @@ function Playing({ songs, selected, setSelected }) {
   };
 
   if (!selected) {
-    return <Typography>No song selected</Typography>;
+    return <Typography>Select to play</Typography>;
   }
 
   const handlePreviousClick = () => {
@@ -80,20 +85,45 @@ function Playing({ songs, selected, setSelected }) {
 
   return (
     <Stack spacing={2} alignItems="center" className="fade-in">
-      <Typography variant="h5">{selected.name}</Typography>
-      <Typography variant="subtitle1">{selected.artist}</Typography>
+      <Box width="100%">
+        <IconButton
+          sx={{
+            backgroundColor: "#FFFFFF1A",
+            borderRadius: "50%",
+            mb: "1rem",
+            ml: "-8px",
+          }}
+          onClick={() => setSelected(null)}
+        >
+          <ArrowBack sx={{ color: "white" }} />
+        </IconButton>
+        <Typography textAlign="start" variant="h5" fontWeight={700} mb={1}>
+          {selected.name}
+        </Typography>
+        <Typography
+          textAlign="start"
+          variant="subtitle1"
+          sx={{
+            color: "white",
+            opacity: 0.6,
+          }}
+        >
+          {selected.artist}
+        </Typography>
+      </Box>
       <Image
         src={`https://cms.samespace.com/assets/${selected.cover}`}
         alt={selected.name}
         width={480}
-        height={480}
+        height={400}
+        className="cover-image"
       />
       <audio ref={audioRef} src={selected.url} />
       <Slider
         value={progress}
         onChange={handleSeekChange}
         aria-labelledby="progress-slider"
-        sx={{ color: "white", width: 200 }}
+        sx={{ color: "white", width: { xs: 300, sm: 480 } }}
       />
       <Box
         width="100%"
